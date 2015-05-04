@@ -1,4 +1,8 @@
-﻿
+﻿THM SDI Master
+
+Prompts
+
+
 Welcome:
 Willkommen beim Infosystem der THM.
 Dieses System hilft Ihnen allgmeine Informationen oder mittels ihrer Matrikelnummer kursspezifische Informationen der THM abzurufen.
