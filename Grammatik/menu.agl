@@ -1,0 +1,10 @@
+Menu:public (Wahl:w) {<auswahl $w>}
+
+Wahl[
+	Infos
+	Kurs
+] {return($return)}
+
+Kurs [kurs ] {return ("kurs")}
+
+Infos [ infos] {return ("infos")}
