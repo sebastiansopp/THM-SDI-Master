@@ -1,0 +1,9 @@
+﻿
+Welcome:
+Willkommen beim Infosystem der THM.
+Dieses System hilft Ihnen allgmeine Informationen oder mittels ihrer Matrikelnummer kursspezifische Informationen der THM abzurufen.
+
+
+
+Menu:
+Wollen Sie allgemeine Informationen sagen Sie bitte INFO und für kurspezifische Informationen sagen Sie bitte KURS. 
