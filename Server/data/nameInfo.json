@@ -1,0 +1,51 @@
+{
+    "rei": {
+        "tel": "01111",
+        "time": "keine",
+        "room": "keiner"
+    },
+    "eu": {
+        "tel": "02222",
+        "time": "Montag, 11:30 bis 12:30 Uhr",
+        "room": "B2 0.10"
+    },
+    "seki": {
+        "tel": "03333",
+        "time": "Montag bis Freitag, 09:30 Uhr bis 11:30 Uhr ",
+        "room": "A3 0.13"
+    },
+    "mniseki": {
+        "tel": "04444",
+        "time": "Montag bis Donnerstag, 09:00 Uhr bis 11.30 Uhr und 13:00 Uhr bis 16:00 Uhr. Freitag, 09:00 Uhr bis 11.30 Uhr",
+        "room": "A20 2.24"
+    },
+    "iemseki": {
+        "tel": "05555",
+        "time": "T\u00e4glich, 09:30 Uhr bis 11:30 Uhr",
+        "room": "A2 1.06"
+    },
+    "mensafriedberg": {
+        "tel": "06666",
+        "time": "Montag bis Freitag, 11:00 Uhr bis 14:00 Uhr",
+        "room": "mensa",
+        "menu": {
+            "mon": "Reis, Steak",
+            "tue": "Nudeln, Saziki",
+            "wed": "Fisch, Kartoffeln",
+            "thu": "Auflauf, Tomaten",
+            "fri": "Mc Donalds"
+        }
+    },
+    "mensagiesen": {
+        "tel": "07777",
+        "time": "Montag bis Freitag, 11:15 Uhr bis 14:00 Uhr. Samstag,  11:30 Uhr bis 13:00 Uhr",
+        "room": "mensa",
+        "menu": {
+            "mon": "R, S",
+            "tue": "N, S",
+            "wed": "F, K",
+            "thu": "A, T",
+            "fri": "McD"
+        }
+    }
+}
