@@ -1,4 +1,4 @@
-Menu:public (Wahl:w) {<auswahl $w>}
+Menu:public (?Pre Wahl:w ?Post) {<auswahl $w>}
 
 Wahl[
 	Infos
@@ -7,4 +7,8 @@ Wahl[
 
 Kurs [kurs ] {return ("kurs")}
 
-Infos [ infos] {return ("infos")}
+Infos [infos informationen] {return ("infos")}
+
+Pre [(ich moechte)] 
+
+Post [ bitte wissen haben ]
