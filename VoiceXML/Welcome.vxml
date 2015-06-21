@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE">
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+
 	<!-- =========================================================================
 	Welcome Modul
 	========================================================================= -->
@@ -8,9 +9,24 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 
 		<form id="Welcome">
 			<block>
+			
+			<script>
+				var date= new Date();
+			</script>
+			
+				<assign name="ani" expr="(session.connection.remote.uri).toString()" />
+				<assign name="ani" expr="'0' + ani" />
+				<assign name="timestamp" expr="date.getTime()"/>
+				<assign name="callID" expr="ani + timestamp"/>
+				
+				<!-- Datenbankzugriff ani checken, logCallStart-->				
+				<!-- <data name="logCallStart" srcexpr=" url +'log'" method="post" namelist="callID timestamp ani" />-->
+				<assign name="callerName" expr="logCallStart.name" />
 				<prompt>
-						Willkommen beim Infosystem der THM.
-						Dieses System hilft Ihnen allgmeine Informationen oder mittels ihrer Matrikelnummer kursspezifische Informationen der THM abzurufen.
+						
+						Willkommen <value expr="callerName"/> beim Infosystem der THM.
+						Dieses System hilft dir allgmeine Informationen oder kursspezifische Informationen der THM abzurufen.
+						
 				</prompt>
 				<goto next="./menu.vxml" />
 			</block>

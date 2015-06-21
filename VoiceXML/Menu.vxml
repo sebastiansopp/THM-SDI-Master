@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+ï»¿<?xml version="1.0" encoding="utf-8"?>
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE">
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	<!-- =========================================================================
 	Menu Modul
 	========================================================================= -->
@@ -13,32 +13,38 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 				<grammar src= "../Grammatik/menu.agl#Menu" type="application/x-nuance-gsl"/>
 				<prompt>
 					<!-- audio src=""-->
-					Wollen Sie allgemeine Informationen sagen Sie bitte INFOS und für kurspezifische Informationen sagen Sie bitte KURS. 				
+					<!--<if cond="callerName != 'unknown'>
+					Hallo <value expr="callerName"/>
+					</if>-->
+					Willst du allgemeine Informationen sag bitte INFOS, fÃ¼r kurspezifische Informationen sag bitte KURS. 				
 					<!--/audio-->
 				</prompt>
-				<filled>
-					<prompt>
-						Sie haben
-						<value expr="menu.auswahl"/> gewählt. 
-					</prompt>
-				</filled>
 			</field>
 			
-			<noinput count="1">
-				<!-- audio src=""-->
-				Bitte sprechen Sie etwas lauter. 
-				<!--/audio-->
-			</noinput>
+		<block>
+			<if cond="menu=='kurs'">
+				<if cond="callerName != 'unknown'>
+					<goto next="./kurs_info.vxml"/>
+				<else/>
+					<goto next="./check_mtnr.vxml"/>
+				</if>
+			<elseif cond="menu=='allgemein'"/>
+				<goto next="./allgemein_info.vxml" />
+			</if>
+		</block>
 			
-			<noinput count="2">
-				<!-- audio src=""-->
-				Ich verstehe Sie leider immer noch nicht! 
-				<!--/audio-->
-			</noinput>
+			
 			
 			<nomatch cond="true" count="1">
 				<!-- audio src=""-->
-				Sorry, meinten Sie INFOS oder KURS?
+				Sorry, meintest du INFOS oder KURS?
+				<!--/audio-->				
+				<reprompt/>
+			</nomatch>
+			
+			<nomatch cond="true" count="2">
+				<!-- audio src=""-->
+				Sag bitte laut und deutlich INFOS oder KURS?
 				<!--/audio-->				
 				<reprompt/>
 			</nomatch>

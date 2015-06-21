@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" 
+version="2.1" xml:lang="de-DE">
+
+<!-- =========================================================================
+	Root Modul
+	========================================================================= -->
+<var name="timestamp" />
+<var name="ani" />
+<var name="callID" />
+<var name="url" expr=" 'http://10.211.55.2:8888/dbi/index.php?action=' " />
+<var name="callerName" />
+
+<!--<var name="mtrnr" />
+<var name="pinnr" />-->
+
+
+
+
+
+<help>
+	Ich kann dir weiterhelfen!
+	<reprompt/>
+</help>
+
+<noinput count="1">
+	<!-- audio src=""-->
+	Bitte sprechen Sie etwas lauter. 
+	<!--/audio-->
+	<reprompt/>
+</noinput>
+			
+<noinput count="2">
+	<!-- audio src=""-->
+	Ich verstehe Sie leider immer noch nicht! 
+	<!--/audio-->
+	<reprompt/>
+</noinput>
+
+<nomatch count="1">
+	<!-- audio src=""-->
+		Wie war das?
+	<!--/audio-->
+	<reprompt/>
+</nomatch>
+
+<nomatch count="2">
+	<!-- audio src=""-->
+		Ich habe Sie leider nicht verstanden. Was haben Sie gesagt?
+	<!--/audio-->
+	<reprompt/>
+</nomatch>
+
+
+</vxml>
