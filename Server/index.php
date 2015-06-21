@@ -36,7 +36,7 @@ else { $action = "";  }
 $sdidata = new SDIData();
 
 switch ($action) {
-    case "loggcallstart":
+    case "logcallstart":
         $callID = $_POST["callID"];
         $ani = $_POST["ani"];
         $timestamp = $_POST["timestamp"];
