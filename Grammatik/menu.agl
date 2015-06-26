@@ -1,4 +1,4 @@
-Menu:public (?Pre Wahl:w ?Post) {<auswahl $w>}
+Menuwahl:public (?Pre Wahl:w ?Post) {<menue $w>}
 
 Wahl[
 	Infos

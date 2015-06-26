@@ -1,0 +1,14 @@
+Kurseinfos:public (?Pre Wahl:w ?Post) {<auswahl $w>}
+
+Wahl[
+	MV1
+	FMI
+] {return($return)}
+
+MV1 [MV1] {return ("mv1")}
+
+FMI [FMI] {return ("fmi")}
+
+Pre [(ich moechte infos ueber)] 
+
+Post [ bitte wissen haben ]

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+	
+	<!-- =========================================================================
+	GetMoreInformation Modul
+	========================================================================= -->
+	
+	<property name="timeout" value="4000ms" />
+	<property name="confidencelevel" value="0.3" />
+		
+	<form id="GetMoreInformation">
+		<block>
+			<!--MenuChoice Log-->
+				<script>
+				var date= new Date();
+				</script>
+	
+			<assign name="menu" expr="'getmoreinfo.vxml'" />
+			<assign name="timestamp" expr="date.getTime()"/>
+			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+			<!--MenuChoice Log-->
+		</block>
+		
+		<field name="getmoreinfo" type="boolean">
+			<grammar src="builtin:grammar/boolean"  />
+			<prompt>
+				Willst du weitere Informationen?
+			</prompt>
+			<filled>
+				<if cond="getmoreinfo == 'false'">
+					<goto next="./goodbye.vxml"/>
+				<else/>
+					<goto next="./menu.vxml"/>
+				</if>
+			</filled>
+		</field>
+		
+		<nomatch cond="true" count="1">
+			Ich habe dich nicht verstanden. Willst du mehr Infos?
+		</nomatch>
+		
+		<nomatch cond="true" count="2">
+			Sag bitte laut und deutlich ja oder nein?
+		</nomatch>
+		
+	</form>
+		
+</vxml>

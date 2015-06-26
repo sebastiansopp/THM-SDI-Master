@@ -13,20 +13,33 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<script>
 				var date= new Date();
 			</script>
-			
+				
+				<!-- MetaDaten erstellen-->
 				<assign name="ani" expr="(session.connection.remote.uri).toString()" />
 				<assign name="ani" expr="'0' + ani" />
 				<assign name="timestamp" expr="date.getTime()"/>
 				<assign name="callID" expr="ani + timestamp"/>
+				<!-- MetaDaten erstellen-->
+
+				<!-- Datenbankzugriff ani checken, logCallStart-->
+				<data name="logcallstart" srcexpr=" url +'logcallstart'" method="post" namelist="callID timestamp ani" />
+				<!-- Datenbankzugriff ani checken, logCallStart-->
+
+				<assign name="callerName" expr="logcallstart.name" />
 				
-				<!-- Datenbankzugriff ani checken, logCallStart-->				
-				<!-- <data name="logCallStart" srcexpr=" url +'log'" method="post" namelist="callID timestamp ani" />-->
-				<assign name="callerName" expr="logCallStart.name" />
+				<!--MenuChoice Log-->
+				<assign name="menu" expr="'welcome.vxml'" />
+				<assign name="timestamp" expr="date.getTime()"/>
+				<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+				<!--MenuChoice Log-->
+				
+							
 				<prompt>
-						
-						Willkommen <value expr="callerName"/> beim Infosystem der THM.
-						Dieses System hilft dir allgmeine Informationen oder kursspezifische Informationen der THM abzurufen.
-						
+					<!-- audio src=""-->
+					Willkommen 
+					<!--beim Infosystem der THM.Dieses System hilft dir allgmeine Informationen oder kursspezifische Informationen der THM abzurufen.-->
+					<!--/audio-->
+
 				</prompt>
 				<goto next="./menu.vxml" />
 			</block>

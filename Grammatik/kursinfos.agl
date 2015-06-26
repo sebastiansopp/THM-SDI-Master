@@ -1,0 +1,24 @@
+Kurseinfos:public (?Pre Wahl:w ?Post) {<auswahl $w>}
+
+Wahl[
+	SDI
+	MV1
+	SAG
+	FMI
+	LL
+] {return($return)}
+
+MV1 [(m v eins) (modellieren virtueller welten eins)] {return ("mv1")}
+
+SDI [(s d i) (sprach dialog systeme)] {return ("sdi")}
+
+SAG [(s a g) (software architektur)] {return ("sag")}
+
+FMI [(f m i) (Fortgeschrittene Mensch Maschine Interaktion)] {return ("smi")}
+
+LL [(l l) (Lehren und Lernen mit neuen Medien)] {return ("ll")}
+
+
+Pre [(ich moechte infos ueber) (gib mir infos ueber) (was gibt es neues ueber)] 
+
+Post [ bitte wissen haben ]

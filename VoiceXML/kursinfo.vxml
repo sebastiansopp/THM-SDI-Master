@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+	
+	<!-- =========================================================================
+	Kursspezifische Informationen Modul
+	========================================================================= -->
+	
+	<property name="bargein" value="true" />
+	<property name="timeout" value="4000ms" />
+	<property name="confidencelevel" value="0.4" />
+
+	<form id="Kurse">
+	
+	<block>
+	<!--MenuChoice Log-->
+		<script>
+			var date= new Date();
+		</script>
+	
+	<assign name="menu" expr="'kurs_info.vxml'" />
+	<assign name="timestamp" expr="date.getTime()"/>
+	<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+	<!--MenuChoice Log-->
+	</block>
+		<field name="kursinfo">
+			<grammar src= "../Grammatik/kursinfos.agl#Kurseinfos" type="application/x-nuance-gsl"/>
+			<prompt>
+				Gib jetzt den Kurs Kürzel an. 				
+			</prompt>
+		</field>
+
+		<filled>
+		<!-- WOLLEN SIE SPEZIELLE ODER ALLGEMEINE INFOS????
+		alg = true ist allgemein false ist spezielle
+		data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kursinfo alg" /-->
+
+		<prompt>
+			<value expr="kursinfo.auswahl"/>
+		</prompt>
+			<goto next="./getmoreinformation.vxml"/>
+		</filled>
+		
+		<nomatch cond="true" count="1">
+			Sorry, welchen Kurs meintest du?
+		</nomatch>
+			
+		<nomatch cond="true" count="2">
+			Sag bitte deutlich einen Kurskürzel.
+		</nomatch>
+		
+	</form>
+</vxml>		

@@ -2,53 +2,67 @@
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	<!-- =========================================================================
-	Menu Modul
+	HauptMenue Modul
 	========================================================================= -->
-		<property name="bargein" value="false" />
-		<property name="timeout" value="4000ms" />
-		<property name="confidencelevel" value="0.6" />
-
-		<form id="Menu">
-			<field name="menu">
-				<grammar src= "../Grammatik/menu.agl#Menu" type="application/x-nuance-gsl"/>
-				<prompt>
-					<!-- audio src=""-->
-					<!--<if cond="callerName != 'unknown'>
-					Hallo <value expr="callerName"/>
-					</if>-->
-					Willst du allgemeine Informationen sag bitte INFOS, für kurspezifische Informationen sag bitte KURS. 				
-					<!--/audio-->
-				</prompt>
-			</field>
-			
-		<block>
-			<if cond="menu=='kurs'">
-				<if cond="callerName != 'unknown'>
-					<goto next="./kurs_info.vxml"/>
-				<else/>
-					<goto next="./check_mtnr.vxml"/>
+	<property name="bargein" value="true" />
+	<property name="timeout" value="4000ms" />
+	<property name="confidencelevel" value="0.4" />
+	<var name="ansprache" expr="'Gast'"/>		
+		
+		
+		<form id="Hauptmenue">
+			<block>
+				<if cond="callerName != ''">
+					<assign name="ansprache" expr="callerName"/>
 				</if>
-			<elseif cond="menu=='allgemein'"/>
-				<goto next="./allgemein_info.vxml" />
-			</if>
-		</block>
-			
-			
-			
-			<nomatch cond="true" count="1">
+				
+				<!--MenuChoice Log-->
+					<script>
+						var date= new Date();
+					</script>
+					<assign name="menu" expr="'menu.vxml'" />
+					<assign name="timestamp" expr="date.getTime()"/>
+					<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+				<!--MenuChoice Log-->
+			</block>
+
+		<field name="menue">
+
+			<grammar src= "../Grammatik/menu.agl#Menuwahl" type="application/x-nuance-gsl"/>
+
+			<prompt>
 				<!-- audio src=""-->
-				Sorry, meintest du INFOS oder KURS?
-				<!--/audio-->				
-				<reprompt/>
-			</nomatch>
+				Hallo, <value expr="ansprache"/>.
+				<!--Willst du allgemeine Informationen sag bitte INFOS, für kurspezifische Informationen sag bitte KURS. -->				
+				<!--/audio-->
+			</prompt>
 			
-			<nomatch cond="true" count="2">
-				<!-- audio src=""-->
-				Sag bitte laut und deutlich INFOS oder KURS?
-				<!--/audio-->				
-				<reprompt/>
-			</nomatch>
-			
-		</form>
-	</vxml>
+		
+			<filled>
+					
+				<if cond = " menue == 'kurs' ">
+					<if cond="callerName != ''">
+						<goto next="./kursinfo.vxml"/>
+					<else/>
+						<goto next="./checkmtnr.vxml"/>
+					</if>
+					<elseif cond="menu=='infos'"/>
+					<goto next="./allgemeininfo.vxml" />
+				</if>
+					
+			</filled>
+		</field>
+
+		
+		<nomatch cond="true" count="1">
+			Sorry, meintest du INFOS oder KURS?
+		</nomatch>
+		
+		<nomatch cond="true" count="2">
+			Sag bitte laut und deutlich INFOS oder KURS?
+		</nomatch>
+		
+	</form>
+	
+</vxml>
 	

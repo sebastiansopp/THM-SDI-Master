@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+	
+	<!-- =========================================================================
+	Good Bye Modul
+	========================================================================= -->
+	
+	<property name="bargein" value="false"/> 
+	
+	
+	<form id="goodbye">
+		
+
+		<block>
+		<assign name="status" expr="'Ende'" />
+			<!--MenuChoice Log-->
+			<script>
+				var date = new Date();
+			</script>
+	
+			<assign name="menu" expr="'goodbye.vxml'" />
+			<assign name="timestamp" expr="date.getTime()"/>
+			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+	
+			<!--MenuChoice Log-->
+			
+			<!--CallEnd Log-->
+			<data name="logcallend" srcexpr=" url +'logcallend'" method="post" namelist="callID timestamp status" />
+			<!--CallEnd Log-->
+			
+			<prompt>
+				<value expr="status"/>
+					Danke für die Nutzung des Informationssystems der THM. Auf Wiederhören.
+				
+			</prompt>
+			
+		</block>	
+		
+			
+	</form>
+</vxml>
+			

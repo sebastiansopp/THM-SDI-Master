@@ -9,12 +9,10 @@ version="2.1" xml:lang="de-DE">
 <var name="timestamp" />
 <var name="ani" />
 <var name="callID" />
-<var name="url" expr=" 'http://10.211.55.2:8888/dbi/index.php?action=' " />
+<var name="url" expr=" 'http://localhost/sdi/index.php?action=' " />
 <var name="callerName" />
-
-<!--<var name="mtrnr" />
-<var name="pinnr" />-->
-
+<var name="menu"/>
+<var name="status"/>
 
 
 
@@ -24,32 +22,44 @@ version="2.1" xml:lang="de-DE">
 	<reprompt/>
 </help>
 
+<catch event="connection.disconnect">
+	<script>
+		var date = new Date();
+	</script>
+		
+	<assign name="status" expr="'Aufgelegt'" />
+	<assign name="timestamp" expr="date.getTime()"/>
+	<!--CallEnd Log-->
+	<data name="logcallend" srcexpr=" url +'logcallend'" method="post" namelist="callID timestamp status" />
+	<!--CallEnd Log-->
+	<exit/>
+</catch>
+
 <noinput count="1">
-	<!-- audio src=""-->
 	Bitte sprechen Sie etwas lauter. 
-	<!--/audio-->
 	<reprompt/>
 </noinput>
 			
 <noinput count="2">
-	<!-- audio src=""-->
 	Ich verstehe Sie leider immer noch nicht! 
-	<!--/audio-->
+	<reprompt/>
+</noinput>
+
+<noinput count="3">
+	Leider ist die Verbindung zu schlecht, ich muss jetzt leider auflegen.
 	<reprompt/>
 </noinput>
 
 <nomatch count="1">
-	<!-- audio src=""-->
-		Wie war das?
-	<!--/audio-->
-	<reprompt/>
+	Wie war das?
 </nomatch>
 
 <nomatch count="2">
-	<!-- audio src=""-->
-		Ich habe Sie leider nicht verstanden. Was haben Sie gesagt?
-	<!--/audio-->
-	<reprompt/>
+	Ich habe Sie leider nicht verstanden. Was haben Sie gesagt?
+</nomatch>
+
+<nomatch count="3">
+	Leider ist die Verbindung zu schlecht, ich muss jetzt leider auflegen.
 </nomatch>
 
 

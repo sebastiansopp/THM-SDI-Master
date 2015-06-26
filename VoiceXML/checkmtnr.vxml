@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+	
+	<!-- =========================================================================
+	Check der Matrikel und Pin Nummer Modul
+	========================================================================= -->
+	<property name="interdigittimeout" value="2000ms" />
+	<property name="timeout" value="4000ms" />
+	<property name="confidencelevel" value="0.6" />
+	<property name="inputmodes" value="dtmf"/>
+	<property name="bargein" value="true"/> 
+	
+	
+	
+	<form id="check_mtnr">
+	
+	<block>
+	<!--MenuChoice Log-->
+		<script>
+			var date= new Date();
+		</script>
+	
+		<assign name="menu" expr="'checkmtnr.vxml'" />
+		<assign name="timestamp" expr="date.getTime()"/>
+		<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+	
+	<!--MenuChoice Log-->
+	</block>
+	
+			<field name="matrklNr">
+			<grammar src="builtin:dtmf/digits?length=6" mode="dtmf"/>
+				<prompt>
+					<!-- audio src=""-->
+					Leider ist deine Telefon Nummer unbekannt. 
+					Gib jetzt bitte deine Matrikelnummer ein. 				
+					<!--/audio-->
+				</prompt>
+				<filled>		
+			<prompt>
+			Deine Matrikelnummer lautet: <say-as interpret-as="number"><value expr="matrklNr"/></say-as>
+			</prompt>
+		</filled>
+			</field>
+			
+						
+			<field name="pin">
+			<grammar src="builtin:dtmf/digits?length=5" mode="dtmf"/>
+				<prompt>
+					<!-- audio src=""-->
+					Gib jetzt bitte deine 5-stellige Pin ein. 				
+					<!--/audio-->
+				</prompt>
+				
+			</field>
+			
+			
+			
+			<block>
+			<data name="checkMTRK" srcexpr=" url +'checkmatrkl' " method="post" namelist="matrklNr pin callID" />
+			
+			<script> 
+				var data = checkMTRK.response;
+				var name = checkMTRK.name;
+			</script>
+			
+			<if cond = " data == 'ok' ">
+				<assign name="callerName" expr="name" />
+				<prompt>
+					deine eingaben waren ok
+					<value expr="callerName"/>
+					<value expr="pin"/>
+					<value expr="matrklNr"/>
+				</prompt>
+				<goto next="./kursinfo.vxml"/>
+			<else/>
+				<prompt>
+					deine eingaben waren falsch.
+				</prompt>
+				<goto next="./goodbye.vxml"/>
+			</if>
+			</block>
+			
+	</form>
+</vxml>
+			
