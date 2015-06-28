@@ -13,8 +13,7 @@ version="2.1" xml:lang="de-DE">
 <var name="callerName" />
 <var name="menu"/>
 <var name="status"/>
-
-
+<var name="redirectNr" />
 
 
 <help>

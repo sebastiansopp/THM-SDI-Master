@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+	
+	
+	<property name="bargein" value="false" />
+	<property name="timeout" value="4000ms" />
+	<property name="confidencelevel" value="0.6" />
+	
+	<form id="choose_info" scope="dialog">
+		<field name="profinfo">
+			<grammar src= "../Grammatik/prof_info.agl#Profinfo" type="application/x-nuance-gsl"/>
+			<prompt>
+				Ueber welchen Professor wollen sie Informationen?
+			</prompt>
+		</field>
+		
+		<field name="info">
+			<grammar src= "../Grammatik/specific_info.agl#Info" type="application/x-nuance-gsl"/>
+			<prompt>
+				Was für Informationen wollen Sie? Rauminformationen, Sprechzeiten oder Telefonnummer.
+			</prompt>
+		</field>
+		
+		
+		<block>
+			<if cond="info == 'nummer'">
+				<assign name="name" expr="profinfo"/>
+				<data name="telnr" srcexpr=" url +'gettelnr'" method="post" namelist="name" />
+				<script> 
+					var data = telnr.response;
+					var tel = telnr.tel;
+					var name = telnr.name;
+				</script>
+				<assign name="tel" expr="tel" />
+				<assign name="redirectNr" expr="tel" />
+				<assign name="name" expr="name" />
+				<prompt>
+					Die Nummer von <value expr="name"/> ist <value expr="tel"/>. 
+				</prompt>
+				<goto next="prof_info.vxml#redirect" />
+			<elseif cond="info == 'zeiten'" />
+				<assign name="name" expr="profinfo"/>
+				<data name="zeiten" srcexpr=" url +'getzeiten'" method="post" namelist="name" />
+				<script> 
+					var data = zeiten.response;
+					var time = zeiten.time;
+					var name = zeiten.name;
+				</script>
+				<assign name="time" expr="time" />
+				<assign name="name" expr="name" />
+				<prompt>
+					Die Sprechzeiten von <value expr="name"/> sind <value expr="time"/>. 
+				</prompt>
+				<goto next="prof_info.vxml#moreProfInfo" />
+			<elseif cond="info == 'raum'" />
+				<assign name="name" expr="profinfo"/>
+				<data name="raum" srcexpr=" url +'getraum'" method="post" namelist="name" />
+				<script> 
+					var data = raum.response;
+					var room = raum.room;
+					var name = raum.name;
+				</script>
+				<assign name="room" expr="room" />
+				<assign name="name" expr="name" />
+				<prompt>
+					Der Raum von <value expr="name"/> ist <value expr="room"/>. 
+				</prompt>
+				<goto next="prof_info.vxml#moreProfInfo" />
+			</if>
+		</block>
+			
+	</form>
+	
+	
+	<form id="moreProfInfo" scope="dialog">
+		<field name="moreInfo" type="boolean">
+			<grammar src="builtin:grammar/boolean?y=1;n=0"   />
+			<prompt>
+					Wollen Sie mehr Professoreninformationen?				
+			</prompt>
+			<filled>
+				<if cond="moreInfo == 'false'">
+					<goto next="./getmoreinformation.vxml" />
+				<elseif cond="moreInfo == 'true'" />
+					<goto next="./prof_info.vxml" />
+				</if>
+			</filled>
+		</field>
+	</form>
+	
+	
+	<form id="redirect" scope="dialog">
+		<field name="moreInfo" type="boolean">
+			<grammar src="builtin:grammar/boolean?y=1;n=0"   />
+			<prompt>
+					Wollen Sie weitergeleitet werden?				
+			</prompt>
+			<filled>
+				<if cond="moreInfo == 'false'">
+					<goto next="prof_info.vxml#moreProfInfo" />
+				<elseif cond="moreInfo == 'true'" />
+					<goto next="./redirect.vxml" />
+				</if>
+			</filled>
+		</field>
+	</form>
+</vxml>
