@@ -13,19 +13,26 @@ class SDIData {
         $this->nameInfo = "data/nameInfo.json";
         $this->matrkl = "data/matrkl.json";
         $this->ani = "data/ani.json";
+        $this->kursinfo = "data/kursinfo.json";
+        $this->kursname = "data/kursnamen.json";
 
 
-        /*$this->teacher = "data/teacher.json";
-        $this->kursname = "data/kursname.json";
-        $this->kurse = "data/kurse.json";*/
+        /*$this->teacher = "data/teacher.json";;*/
 
     }
 
 
     function logCallSTart($callID, $ani, $timestamp) {
+        $json = $this->readJson($this->ani);
+        $matrk = "undefined";
+        if( $json != false && isset($json[$ani]) ){
+            $matrk = $json[$ani];
+        }
+
         $logObject = [
             "callID"        => $callID,
             "ani"           => $ani,
+            "matrkl"        => $matrk,
             "callStart"     => $timestamp,
             "callEnd"       => "",
             "callEndStatus" => "",
@@ -85,6 +92,13 @@ class SDIData {
         $json = $this->readJson($this->matrkl);
         if( $json != false && isset($json[$matrklNr]) ){
             if( strcmp($json[$matrklNr]['pin'], $pin) == 0 ){
+                $fileName = 'logs/'.$callID.'.json';
+                $input = $this->readJson($fileName);
+                if($input != false) {
+                    $input["matrkl"] = $matrklNr;
+                    $this->writeJson($fileName, $input);
+                }
+
                 return '{"response": "ok", "name": "' . $json[$matrklNr]['vorname'] . " " . $json[$matrklNr]['name'] . '"}';
             }
             return '{"response": "wrong", "name": ""}';
@@ -92,8 +106,40 @@ class SDIData {
         return '{"response": "unavailable", "name": ""}';
     }
 
-    function getKursInfo($callID, $kurs) {
-        return "";
+    function getKursInfo($callID, $kurs, $alg) {
+        if($alg == true) {
+            $fileName = 'logs/'.$callID.'.json';
+            $input = $this->readJson($fileName);
+
+            if($input != false) {
+                $matrklNr = $input["matrkl"];
+                if(strlen($matrklNr) == 6){
+                    $json = $this->readJson($this->matrkl);
+                    if( $json != false && isset($json[$matrklNr]) ){
+                        if (in_array($kurs, $json[$matrklNr]["kurse"])){
+                            $json2 = $this->readJson($this->kursinfo);
+                            $json3 = $this->readJson($this->kursname);
+                            if( $json2 != false && isset($json2[$kurs]) ){
+                                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "' . $json2[$kurs] . '"}';
+                            }
+                            return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Es gibt keine aktuellen Informationen zu ' . $json3[strtoupper($kurs)] . '."}';
+                        }
+                        return '{"response": "kurs unavailable", "name": "", "info": ""}';
+                    }
+                }
+                return '{"response": "matrkl unavailable", "name": "", "info": ""}';
+            }
+        }
+        else {
+            $punkte = rand(0, 100);
+            if($punkte < 50) {
+                return '{"response": "ok", "info": "Sie haben nicht bestanden mit ' . $punkte . ' Punkten."}';
+            }
+            else {
+                return '{"response": "ok", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
+            }
+        }
+        return '{"response": "unavailable", "info": ""}';
     }
 
     function getTelNr($name) {
