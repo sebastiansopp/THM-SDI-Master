@@ -114,7 +114,7 @@ echo date("D", strtotime("2011-01-07"));*/
 
 //echo $sdidata->getTelNr('mensagiesen');
 //echo $sdidata->checkMatrkl("1234", "907284", "12345");
-//echo $sdidata->getKursInfo("1234", "kmm", true);
+//echo $sdidata->getKursInfo("1234", "sdi", false);
 //echo $sdidata->getEssen("eu", "fri");
 //$sdidata->logCallSTart("1234", "666", "100");
 //$sdidata->logMenuChoice("1234", "menu1", "130");

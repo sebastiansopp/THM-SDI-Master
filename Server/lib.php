@@ -108,6 +108,19 @@ class SDIData {
 
     function getKursInfo($callID, $kurs, $alg) {
         if($alg == true) {
+            $json2 = $this->readJson($this->kursinfo);
+            $json3 = $this->readJson($this->kursname);
+            if( $json2 != false && isset($json2[$kurs]) ){
+                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "' . $json2[$kurs] . '"}';
+            }
+            if(array_key_exists(strtoupper($kurs), $json3)) {
+                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Es gibt keine aktuellen Informationen zu ' . $json3[strtoupper($kurs)] . '."}';
+            }
+            else {
+                return '{"response": "ok", "name": "", "info": "Der Kurs existiert nicht."}';
+            }
+        }
+        else {
             $fileName = 'logs/'.$callID.'.json';
             $input = $this->readJson($fileName);
 
@@ -117,26 +130,18 @@ class SDIData {
                     $json = $this->readJson($this->matrkl);
                     if( $json != false && isset($json[$matrklNr]) ){
                         if (in_array($kurs, $json[$matrklNr]["kurse"])){
-                            $json2 = $this->readJson($this->kursinfo);
-                            $json3 = $this->readJson($this->kursname);
-                            if( $json2 != false && isset($json2[$kurs]) ){
-                                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "' . $json2[$kurs] . '"}';
+                            $punkte = rand(0, 100);
+                            if($punkte < 50) {
+                                return '{"response": "ok", "info": "Sie haben nicht bestanden mit ' . $punkte . ' Punkten."}';
                             }
-                            return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Es gibt keine aktuellen Informationen zu ' . $json3[strtoupper($kurs)] . '."}';
+                            else {
+                                return '{"response": "ok", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
+                            }
                         }
-                        return '{"response": "kurs unavailable", "name": "", "info": ""}';
+                        return '{"response": "kurs nicht angemeldet", "name": "", "info": ""}';
                     }
                 }
                 return '{"response": "matrkl unavailable", "name": "", "info": ""}';
-            }
-        }
-        else {
-            $punkte = rand(0, 100);
-            if($punkte < 50) {
-                return '{"response": "ok", "info": "Sie haben nicht bestanden mit ' . $punkte . ' Punkten."}';
-            }
-            else {
-                return '{"response": "ok", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
             }
         }
         return '{"response": "unavailable", "info": ""}';
