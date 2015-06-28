@@ -15,10 +15,7 @@ class SDIData {
         $this->ani = "data/ani.json";
         $this->kursinfo = "data/kursinfo.json";
         $this->kursname = "data/kursnamen.json";
-
-
-        /*$this->teacher = "data/teacher.json";;*/
-
+        $this->teacher = "data/teacher.json";
     }
 
 
@@ -151,28 +148,29 @@ class SDIData {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
             if( isset($json[$name]) ){
-                return '{"response": "ok", "tel": "' . $json[$name]['tel'] . '"}';
+                $json2 = $this->readJson($this->teacher);
+                return '{"response": "ok", "tel": "' . $json[$name]['tel'] . '", "name": "' . $json2[ucfirst($name)] . '"}';
             }
-            return '{"response": "no tel", "tel": ""}';
+            return '{"response": "no tel", "tel": "", "name": ""}';
         }
-        return '{"response": "unavailable", "tel": ""}';
+        return '{"response": "unavailable", "tel": "", "name": ""}';
     }
 
     function getZeiten($name) {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
             if( isset($json[$name]) ){
-                return '{"response": "ok", "time": "' . $json[$name]['time'] . '"}';
+                $json2 = $this->readJson($this->teacher);
+                return '{"response": "ok", "time": "' . $json[$name]['time'] . '", "name": "' . $json2[ucfirst($name)] . '"}';
             }
-            return '{"response": "no time", "time": ""}';
+            return '{"response": "no time", "time": "", "name": ""}';
         }
-        return '{"response": "unavailable", "time": ""}';
+        return '{"response": "unavailable", "time": "", "name": ""}';
     }
 
     function getEssen($name, $tag) {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
-            //return '{"response": "ok", "room": "' . $json[$name]['room'] . '"}';
             if( isset($json[$name]['menu']) ){
                 if( isset($json[$name]['menu'][$tag]) ){
                     return '{"response": "ok", "menu": "' . $json[$name]['menu'][$tag] . '"}';
@@ -188,11 +186,12 @@ class SDIData {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
             if( isset($json[$name]['room']) ){
-                return '{"response": "ok", "room": "' . $json[$name]['room'] . '"}';
+                $json2 = $this->readJson($this->teacher);
+                return '{"response": "ok", "room": "' . $json[$name]['room'] . '", "name": "' . $json2[ucfirst($name)] . '"}';
             }
-            return '{"response": "no room", "room": ""}';
+            return '{"response": "no room", "room": "", "name": ""}';
         }
-        return '{"response": "unavailable", "room": ""}';
+        return '{"response": "unavailable", "room": "", "name": ""}';
     }
 
     /*
