@@ -6,9 +6,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	GetMoreInformation Modul
 	========================================================================= -->
 	
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.7" />
-	<property name="universals" value="help"/>
+	
 
 		
 	<form id="GetMoreInformation">

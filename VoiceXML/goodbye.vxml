@@ -6,8 +6,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	Good Bye Modul
 	========================================================================= -->
 	
-	<property name="bargein" value="false"/> 
-	
+		
 	
 	<form id="goodbye">
 		

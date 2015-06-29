@@ -6,11 +6,9 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	Check der Matrikel und Pin Nummer Modul
 	========================================================================= -->
 	<property name="interdigittimeout" value="2000ms" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.6" />
 	<property name="inputmodes" value="dtmf"/>
-	<property name="bargein" value="true"/> 
 	
+	<var name="pinTry" expr="0"/>
 	
 	
 	<form id="check_mtnr">
@@ -28,35 +26,30 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	<!--MenuChoice Log-->
 	</block>
 	
-			<field name="matrklNr">
+		<field name="matrklNr">
 			<grammar src="builtin:dtmf/digits?length=6" mode="dtmf"/>
 				<prompt>
-					<!-- audio src=""-->
 					Leider ist deine Telefon Nummer unbekannt. 
 					Gib jetzt bitte deine Matrikelnummer ein. 				
-					<!--/audio-->
 				</prompt>
-				<filled>		
-			<prompt>
-			Deine Matrikelnummer lautet: <say-as interpret-as="number"><value expr="matrklNr"/></say-as>
-			</prompt>
-		</filled>
-			</field>
+			<filled>		
+				<prompt>
+					Deine Matrikelnummer lautet: <say-as interpret-as="number"><value expr="matrklNr"/></say-as>
+				</prompt>
+			</filled>
+		</field>
 			
 						
-			<field name="pin">
+		<field name="pin">
 			<grammar src="builtin:dtmf/digits?length=5" mode="dtmf"/>
 				<prompt>
-					<!-- audio src=""-->
 					Gib jetzt bitte deine 5-stellige Pin ein. 				
-					<!--/audio-->
 				</prompt>
-				
-			</field>
+		</field>
 			
 			
 			
-			<block>
+		<block>
 			<data name="checkMTRK" srcexpr=" url +'checkmatrkl' " method="post" namelist="matrklNr pin callID" />
 			
 			<script> 
@@ -74,13 +67,25 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 				</prompt>
 				<goto next="./kursinfo.vxml"/>
 			<else/>
-				<prompt>
-					deine eingaben waren falsch.
-				</prompt>
-				<goto next="./goodbye.vxml"/>
-			</if>
-			</block>
 			
+			<script> 
+				pinTry++;
+			</script>
+			
+				<if cond = " pinTry == '3' ">
+					<prompt>
+						Zu viele falsche Eingaben.
+						<goto next="./goodbye.vxml"/>
+					</prompt>
+				<else/>
+					<prompt>
+					<value expr="pinTry"/>
+					deine eingaben waren falsch.
+					</prompt>
+					<clear namelist="pin"/>
+				</if>
+			</if>
+		</block>
 	</form>
 </vxml>
 			

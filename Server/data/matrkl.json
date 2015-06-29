@@ -3,5 +3,10 @@
         "name": "Weisflug",
         "vorname": "Franz",
         "pin": "12345"
+    },
+    "123456": {
+        "name": "Sopp",
+        "vorname": "Sebastian",
+        "pin": "12345"
     }
 }

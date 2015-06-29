@@ -6,15 +6,12 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	Kursspezifische Informationen Modul
 	========================================================================= -->
 	
-	<property name="bargein" value="true" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.4" />
-	<property name="universals" value="help"/>
 	<var name="alg"/>
 	
 
 	<form id="Kurse">
-	<property name="universals" value="help" />
+	
+	
 	<block>
 	<!--MenuChoice Log-->
 		<script>
@@ -44,16 +41,30 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			
 				<if cond="spezielle.auswahl == 'spezielle'">
 					<assign name="alg" expr="'false'"/>
-					<else/>
+				<else/>
 					<assign name="alg" expr="'true'"/>
 				</if>
 				
-				<!-- WOLLEN SIE SPEZIELLE ODER ALLGEMEINE INFOS????
-				alg = true ist allgemein false ist spezielle
-				data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kursinfo alg" /-->
+				
+				<data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kursinfo alg"/>
+				
+				
+				<script> 
+					var data = getkursinfo.response;
+					var info = getkursinfo.info;
+					var name = getkursinfo.name;
+				</script>
+				
+				
 				
 				<prompt>
-				<value expr="alg"/>
+				
+				<if cond="data == 'ok'">
+					Der Kurs <value expr="name"/> bietet folgende Infos an: <value expr="info"/>
+				<else/>
+					<value expr="data"/>
+				</if>
+				
 				</prompt>
 				<goto next="./getmoreinformation.vxml"/>
 			</filled>

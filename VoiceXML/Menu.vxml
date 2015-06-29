@@ -4,9 +4,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	<!-- =========================================================================
 	HauptMenue Modul
 	========================================================================= -->
-	<property name="bargein" value="true" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.4" />
+		
 	<var name="ansprache" expr="'Gast'"/>		
 		
 		
@@ -33,7 +31,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<prompt>
 				<!-- audio src=""-->
 				Hallo, <value expr="ansprache"/>.
-				<!--Willst du allgemeine Informationen sag bitte INFOS, für kurspezifische Informationen sag bitte KURS. -->				
+				Willst du allgemeine Informationen sag bitte INFOS, für kurspezifische Informationen sag bitte KURS. 				
 				<!--/audio-->
 			</prompt>
 			

@@ -16,6 +16,12 @@ version="2.1" xml:lang="de-DE">
 <var name="specialStatus"/>
 <var name="redirectNr" />
 
+
+<property name="bargein" value="false" />
+<property name="timeout" value="4000ms" />
+<property name="confidencelevel" value="0.5" />
+
+
 <link>
     <grammar>
         <![CDATA[ Doof:public [ hilfe {
