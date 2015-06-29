@@ -1,0 +1,20 @@
+Info:public (?Pre Wahl:w ?Post) {<info $w>}
+
+Wahl[
+	Sekretariat
+	Termin
+	Professor
+	Mensa
+] {return($return)}
+
+Sekretariat [sekretariat] {return ("sekreteriat")}
+
+Termin [termine termin] {return ("termin")}
+
+Professor [prof professor dozent] {return ("professor")}
+
+Mensa [mensa cafeteria] {return ("mensa")}
+
+Pre [(ich moechte)] 
+
+Post [ info infos informationen bitte wissen haben ]

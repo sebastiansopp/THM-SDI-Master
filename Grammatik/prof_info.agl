@@ -1,0 +1,15 @@
+Profinfo:public (?Pre Wahl:w ?Post) {<profinfo $w>}
+
+Wahl[
+	Euler
+	Reininger
+] {return($return)}
+
+Euler [euler (professor euler) (herr euler)] {return ("eu")}
+
+Reininger [reininger (professor reininger) (herr reininger)] {return ("rei")}
+
+
+Pre [(ich moechte)] 
+
+Post [ info infos informationen bitte wissen haben ]

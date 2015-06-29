@@ -15,13 +15,6 @@ version="2.1" xml:lang="de-DE">
 <var name="status"/>
 <var name="specialStatus"/>
 
-<link>
-	<grammar>
-		<![CDATA[ Doof:public [ hilfe {
-		<HELP HELP>
-			} ] ]]>
-		</grammar>
-</link>
 
 
 <help count="1" cond="true">

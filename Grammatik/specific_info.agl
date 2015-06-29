@@ -1,0 +1,18 @@
+Info:public (?Pre Wahl:w ?Post) {<info $w>}
+
+Wahl[
+	Nummer
+	Zeiten
+	Raum
+] {return($return)}
+
+Nummer [nummer telefonnummer telefon] {return ("nummer")}
+
+Zeiten [zeiten oeffnungszeiten sprechzeiten] {return ("zeiten")}
+
+Raum [raum] {return ("raum")}
+
+
+Pre [(ich moechte)] 
+
+Post [ info infos informationen bitte wissen haben ]

@@ -67,7 +67,8 @@ switch ($action) {
   	case "getkursinfo":
         $callID = $_POST["callID"];
         $kurs = $_POST["kurs"];
-        echo $sdidata->getKursInfo($callID, $kurs);
+        $alg = $_POST["alg"];
+        echo $sdidata->getKursInfo($callID, $kurs, $alg);
         break;
   	case "gettelnr":
         $name = $_POST["name"];
@@ -112,9 +113,10 @@ echo date("D", strtotime("2011-01-07"));*/
 
 
 //echo $sdidata->getTelNr('mensagiesen');
-//echo $sdidata->checkMatrkl("", "907284", "14235");
+//echo $sdidata->checkMatrkl("1234", "907284", "12345");
+//echo $sdidata->getKursInfo("1234", "sdi", false);
 //echo $sdidata->getEssen("eu", "fri");
-//$sdidata->logCallSTart("1234", "0666", "100");
+//$sdidata->logCallSTart("1234", "666", "100");
 //$sdidata->logMenuChoice("1234", "menu1", "130");
 //$sdidata->logMenuChoice("1234", "menu2", "160");
 //$sdidata->logCallEnd("1234", "ok", "200");

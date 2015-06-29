@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
+	
+	<!-- =========================================================================
+	Kursspezifische Informationen Modul
+	========================================================================= -->
+	
+	<property name="bargein" value="false" />
+	<property name="timeout" value="4000ms" />
+	<property name="confidencelevel" value="0.6" />
+	
+	<form id="choose_info">
+		<field name="info">
+			<prompt>
+				Sekretariat Informationen
+			</prompt>
+		</field>
+	</form>
+</vxml>

@@ -13,19 +13,23 @@ class SDIData {
         $this->nameInfo = "data/nameInfo.json";
         $this->matrkl = "data/matrkl.json";
         $this->ani = "data/ani.json";
-
-
-        /*$this->teacher = "data/teacher.json";
-        $this->kursname = "data/kursname.json";
-        $this->kurse = "data/kurse.json";*/
-
+        $this->kursinfo = "data/kursinfo.json";
+        $this->kursname = "data/kursnamen.json";
+        $this->teacher = "data/teacher.json";
     }
 
 
     function logCallSTart($callID, $ani, $timestamp) {
+        $json = $this->readJson($this->ani);
+        $matrk = "undefined";
+        if( $json != false && isset($json[$ani]) ){
+            $matrk = $json[$ani];
+        }
+
         $logObject = [
             "callID"        => $callID,
             "ani"           => $ani,
+            "matrkl"        => $matrk,
             "callStart"     => $timestamp,
             "callEnd"       => "",
             "callEndStatus" => "",
@@ -85,6 +89,13 @@ class SDIData {
         $json = $this->readJson($this->matrkl);
         if( $json != false && isset($json[$matrklNr]) ){
             if( strcmp($json[$matrklNr]['pin'], $pin) == 0 ){
+                $fileName = 'logs/'.$callID.'.json';
+                $input = $this->readJson($fileName);
+                if($input != false) {
+                    $input["matrkl"] = $matrklNr;
+                    $this->writeJson($fileName, $input);
+                }
+
                 return '{"response": "ok", "name": "' . $json[$matrklNr]['vorname'] . " " . $json[$matrklNr]['name'] . '"}';
             }
             return '{"response": "wrong", "name": ""}';
@@ -92,36 +103,74 @@ class SDIData {
         return '{"response": "unavailable", "name": ""}';
     }
 
-    function getKursInfo($callID, $kurs) {
-        return "";
+    function getKursInfo($callID, $kurs, $alg) {
+        if($alg == true) {
+            $json2 = $this->readJson($this->kursinfo);
+            $json3 = $this->readJson($this->kursname);
+            if( $json2 != false && isset($json2[$kurs]) ){
+                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "' . $json2[$kurs] . '"}';
+            }
+            if(array_key_exists(strtoupper($kurs), $json3)) {
+                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Es gibt keine aktuellen Informationen zu ' . $json3[strtoupper($kurs)] . '."}';
+            }
+            else {
+                return '{"response": "ok", "name": "", "info": "Der Kurs existiert nicht."}';
+            }
+        }
+        else {
+            $fileName = 'logs/'.$callID.'.json';
+            $input = $this->readJson($fileName);
+
+            if($input != false) {
+                $matrklNr = $input["matrkl"];
+                if(strlen($matrklNr) == 6){
+                    $json = $this->readJson($this->matrkl);
+                    if( $json != false && isset($json[$matrklNr]) ){
+                        if (in_array($kurs, $json[$matrklNr]["kurse"])){
+                            $punkte = rand(0, 100);
+                            if($punkte < 50) {
+                                return '{"response": "ok", "info": "Sie haben nicht bestanden mit ' . $punkte . ' Punkten."}';
+                            }
+                            else {
+                                return '{"response": "ok", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
+                            }
+                        }
+                        return '{"response": "kurs nicht angemeldet", "name": "", "info": ""}';
+                    }
+                }
+                return '{"response": "matrkl unavailable", "name": "", "info": ""}';
+            }
+        }
+        return '{"response": "unavailable", "info": ""}';
     }
 
     function getTelNr($name) {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
             if( isset($json[$name]) ){
-                return '{"response": "ok", "tel": "' . $json[$name]['tel'] . '"}';
+                $json2 = $this->readJson($this->teacher);
+                return '{"response": "ok", "tel": "' . $json[$name]['tel'] . '", "name": "' . $json2[ucfirst($name)] . '"}';
             }
-            return '{"response": "no tel", "tel": ""}';
+            return '{"response": "no tel", "tel": "", "name": ""}';
         }
-        return '{"response": "unavailable", "tel": ""}';
+        return '{"response": "unavailable", "tel": "", "name": ""}';
     }
 
     function getZeiten($name) {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
             if( isset($json[$name]) ){
-                return '{"response": "ok", "time": "' . $json[$name]['time'] . '"}';
+                $json2 = $this->readJson($this->teacher);
+                return '{"response": "ok", "time": "' . $json[$name]['time'] . '", "name": "' . $json2[ucfirst($name)] . '"}';
             }
-            return '{"response": "no time", "time": ""}';
+            return '{"response": "no time", "time": "", "name": ""}';
         }
-        return '{"response": "unavailable", "time": ""}';
+        return '{"response": "unavailable", "time": "", "name": ""}';
     }
 
     function getEssen($name, $tag) {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
-            //return '{"response": "ok", "room": "' . $json[$name]['room'] . '"}';
             if( isset($json[$name]['menu']) ){
                 if( isset($json[$name]['menu'][$tag]) ){
                     return '{"response": "ok", "menu": "' . $json[$name]['menu'][$tag] . '"}';
@@ -137,11 +186,12 @@ class SDIData {
         $json = $this->readJson($this->nameInfo);
         if( $json != false && isset($json[$name]) ){
             if( isset($json[$name]['room']) ){
-                return '{"response": "ok", "room": "' . $json[$name]['room'] . '"}';
+                $json2 = $this->readJson($this->teacher);
+                return '{"response": "ok", "room": "' . $json[$name]['room'] . '", "name": "' . $json2[ucfirst($name)] . '"}';
             }
-            return '{"response": "no room", "room": ""}';
+            return '{"response": "no room", "room": "", "name": ""}';
         }
-        return '{"response": "unavailable", "room": ""}';
+        return '{"response": "unavailable", "room": "", "name": ""}';
     }
 
     /*
