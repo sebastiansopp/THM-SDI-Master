@@ -13,19 +13,20 @@ version="2.1" xml:lang="de-DE">
 <var name="callerName" />
 <var name="menu"/>
 <var name="status"/>
+<<<<<<< HEAD
 <var name="specialStatus"/>
-<var name="redirectNr" />
 
 <link>
-    <grammar>
-        <![CDATA[ Doof:public [ hilfe {
-        <HELP HELP>
-            } ] ]]>
-        </grammar>
+	<grammar>
+		<![CDATA[ Doof:public [ hilfe {
+		<HELP HELP>
+			} ] ]]>
+		</grammar>
 </link>
 
-
-
+=======
+<var name="redirectNr" />
+>>>>>>> 4d9000ae1ef8e4fb44bd8a0c4de594feda324a00
 
 <help count="1" cond="true">
 	Ich kann dir weiterhelfen!
