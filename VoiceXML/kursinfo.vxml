@@ -9,9 +9,12 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	<property name="bargein" value="true" />
 	<property name="timeout" value="4000ms" />
 	<property name="confidencelevel" value="0.4" />
+	<property name="universals" value="help"/>
+	<var name="alg"/>
+	
 
 	<form id="Kurse">
-	
+	<property name="universals" value="help" />
 	<block>
 	<!--MenuChoice Log-->
 		<script>
@@ -23,6 +26,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
 	<!--MenuChoice Log-->
 	</block>
+	
 		<field name="kursinfo">
 			<grammar src= "../Grammatik/kursinfos.agl#Kurseinfos" type="application/x-nuance-gsl"/>
 			<prompt>
@@ -30,16 +34,30 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			</prompt>
 		</field>
 
-		<filled>
-		<!-- WOLLEN SIE SPEZIELLE ODER ALLGEMEINE INFOS????
-		alg = true ist allgemein false ist spezielle
-		data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kursinfo alg" /-->
-
-		<prompt>
-			<value expr="kursinfo.auswahl"/>
-		</prompt>
-			<goto next="./getmoreinformation.vxml"/>
-		</filled>
+		
+		<field name="spezielle">
+			<grammar src= "../Grammatik/spezielle.agl#Spezielle" type="application/x-nuance-gsl"/>
+				<prompt>
+					Willst du allgemeine oder Spezielle Infos zu dem Kurs <value expr="kursinfo.auswahl"/> ? 				
+				</prompt>
+			<filled>
+			
+				<if cond="spezielle.auswahl == 'spezielle'">
+					<assign name="alg" expr="'false'"/>
+					<else/>
+					<assign name="alg" expr="'true'"/>
+				</if>
+				
+				<!-- WOLLEN SIE SPEZIELLE ODER ALLGEMEINE INFOS????
+				alg = true ist allgemein false ist spezielle
+				data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kursinfo alg" /-->
+				
+				<prompt>
+				<value expr="alg"/>
+				</prompt>
+				<goto next="./getmoreinformation.vxml"/>
+			</filled>
+		</field>
 		
 		<nomatch cond="true" count="1">
 			Sorry, welchen Kurs meintest du?
@@ -48,6 +66,13 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		<nomatch cond="true" count="2">
 			Sag bitte deutlich einen Kurskürzel.
 		</nomatch>
+		
+		<help count="1" cond="true">
+		<prompt>
+		Hilf dir selber.
+		</prompt>
+		<repromt/>
+		</help>
 		
 	</form>
 </vxml>		

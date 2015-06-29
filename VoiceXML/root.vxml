@@ -13,21 +13,34 @@ version="2.1" xml:lang="de-DE">
 <var name="callerName" />
 <var name="menu"/>
 <var name="status"/>
+<var name="specialStatus"/>
+
+<link>
+	<grammar>
+		<![CDATA[ Doof:public [ hilfe {
+		<HELP HELP>
+			} ] ]]>
+		</grammar>
+</link>
 
 
-
-
-<help>
+<help count="1" cond="true">
 	Ich kann dir weiterhelfen!
 	<reprompt/>
 </help>
 
 <catch event="connection.disconnect">
+
 	<script>
 		var date = new Date();
 	</script>
-		
-	<assign name="status" expr="'Aufgelegt'" />
+	
+	<if cond = " specialStatus == undefined ">
+		<assign name="status" expr="'Aufgelegt'" />
+	<else/>	
+		<assign name="status" expr="specialStatus" />
+	</if>
+	
 	<assign name="timestamp" expr="date.getTime()"/>
 	<!--CallEnd Log-->
 	<data name="logcallend" srcexpr=" url +'logcallend'" method="post" namelist="callID timestamp status" />
@@ -46,8 +59,9 @@ version="2.1" xml:lang="de-DE">
 </noinput>
 
 <noinput count="3">
+	<assign name="specialStatus" expr="'3TimesNoInput'" />
 	Leider ist die Verbindung zu schlecht, ich muss jetzt leider auflegen.
-	<reprompt/>
+	<disconnect />
 </noinput>
 
 <nomatch count="1">
@@ -59,7 +73,14 @@ version="2.1" xml:lang="de-DE">
 </nomatch>
 
 <nomatch count="3">
+	
+	<assign name="specialStatus" expr="'3TimesNoMatch'" />
+	
+	
 	Leider ist die Verbindung zu schlecht, ich muss jetzt leider auflegen.
+	
+	
+	<disconnect />
 </nomatch>
 
 
