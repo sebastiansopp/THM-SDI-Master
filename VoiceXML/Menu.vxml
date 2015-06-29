@@ -53,6 +53,9 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			</filled>
 		</field>
 
+		<help count="1" cond="true">
+		Allgemeine Infos sind für alle, kurs infos nur für eingeschriebene studenten. Sag jetzt einfach Infos oder Kurs. 
+		</help>
 		
 		<nomatch cond="true" count="1">
 			Sorry, meintest du INFOS oder KURS?

@@ -30,7 +30,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<!--CallEnd Log-->
 			
 			<prompt>
-				<value expr="status"/>
+				
 					Danke für die Nutzung des Informationssystems der THM. Auf Wiederhören.
 				
 			</prompt>

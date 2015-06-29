@@ -14,11 +14,15 @@ SDI [(s d i) (sprach dialog systeme)] {return ("sdi")}
 
 SAG [(s a g) (software architektur)] {return ("sag")}
 
-FMI [(f m i) (Fortgeschrittene Mensch Maschine Interaktion)] {return ("smi")}
+FMI [(f m i) (fortgeschrittene mensch maschine interaktion)] {return ("fmi")}
 
-LL [(l l) (Lehren und Lernen mit neuen Medien)] {return ("ll")}
+LL [(l l) (lehren und lernen mit neuen medien)] {return ("ll")}
 
 
 Pre [(ich moechte infos ueber) (gib mir infos ueber) (was gibt es neues ueber)] 
 
 Post [ bitte wissen haben ]
+
+
+
+

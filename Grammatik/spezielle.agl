@@ -1,0 +1,14 @@
+Spezielle:public (?Pre Wahl:w ?Post) {<auswahl $w>}
+
+Wahl[
+	Spezielle
+	Allgemeine
+] {return($return)}
+
+Spezielle [(spezielle) ] {return ("spezielle")}
+
+Allgemeine [(allgemeine)] {return ("allgemeine")}
+
+Pre [(ich moechte) (gib mir)] 
+
+Post [ infos bitte wissen haben ]
