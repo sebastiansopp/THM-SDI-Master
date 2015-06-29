@@ -2,6 +2,10 @@
     "907284": {
         "name": "Weisflug",
         "vorname": "Franz",
-        "pin": "12345"
+        "pin": "12345",
+        "kurse": [
+            "sdi",
+            "kmm"
+        ]
     }
 }
