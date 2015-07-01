@@ -19,24 +19,26 @@ version="2.1" xml:lang="de-DE">
 
 <property name="bargein" value="false" />
 <property name="timeout" value="4000ms" />
-<property name="confidencelevel" value="0.5" />
+<property name="confidencelevel" value="0.4" />
 
 
+<!--Hilfe Grammar-->
 <link>
     <grammar>
-        <![CDATA[ Doof:public [ hilfe {
+        <![CDATA[ Eingabe:public [ hilfe {
         <HELP HELP>
             } ] ]]>
         </grammar>
 </link>
-
+<!--Hilfe Grammar-->
 
 
 
 <help count="1" cond="true">
-	Ich kann dir weiterhelfen!
+	Dieses System hilft dir allgemeine oder kurzspezifische Informationen der Technischen Hochschule Mittelhessen zu erhalten.
 	<reprompt/>
 </help>
+
 
 <catch event="connection.disconnect">
 
@@ -67,9 +69,9 @@ version="2.1" xml:lang="de-DE">
 	<reprompt/>
 </noinput>
 
-<noinput count="3">
-	<assign name="specialStatus" expr="'3TimesNoInput'" />
-	Leider ist die Verbindung zu schlecht, ich muss jetzt leider auflegen.
+<noinput count="5">
+	<assign name="specialStatus" expr="'5TimesNoInput'" />
+	Leider ist die Verbindung zu schlecht, versuch es zu einem späteren Zeitpunkt wieder. Auf Wiederhören.
 	<disconnect />
 </noinput>
 
@@ -81,14 +83,9 @@ version="2.1" xml:lang="de-DE">
 	Ich habe Sie leider nicht verstanden. Was haben Sie gesagt?
 </nomatch>
 
-<nomatch count="3">
-	
-	<assign name="specialStatus" expr="'3TimesNoMatch'" />
-	
-	
-	Leider ist die Verbindung zu schlecht, ich muss jetzt leider auflegen.
-	
-	
+<nomatch count="5">
+	<assign name="specialStatus" expr="'5TimesNoMatch'" />
+	Leider ist die Verbindung zu schlecht, versuch es zu einem späteren Zeitpunkt wieder. Auf Wiederhören.
 	<disconnect />
 </nomatch>
 

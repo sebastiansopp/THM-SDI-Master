@@ -36,9 +36,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 							
 				<prompt>
 					<!--audio src="../audios/welcome.wav"-->
-					Willkommen 
-					
-					<!--beim Infosystem der THM.Dieses System hilft dir allgmeine Informationen oder kursspezifische Informationen der THM abzurufen.-->
+					Willkommen, beim Infosystem der THM.
 					<!--/audio-->
 
 				</prompt>

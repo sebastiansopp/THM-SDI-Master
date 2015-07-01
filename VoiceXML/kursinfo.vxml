@@ -2,88 +2,90 @@
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	
-	<!-- =========================================================================
-	Kursspezifische Informationen Modul
-	========================================================================= -->
-	
-	<var name="alg"/>
-	
+<!-- =========================================================================
+Kursspezifische Informationen Modul
+========================================================================= -->
 
-	<form id="Kurse">
+<var name="alg"/>
+<var name="kurs"/>
+
+
+<form id="Kurse">
 	
 	
 	<block>
-	<!--MenuChoice Log-->
-		<script>
-			var date= new Date();
-		</script>
-	
-	<assign name="menu" expr="'kurs_info.vxml'" />
-	<assign name="timestamp" expr="date.getTime()"/>
-	<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
-	<!--MenuChoice Log-->
+		<!--MenuChoice Log-->
+			<script>
+				var date= new Date();
+			</script>
+		
+		<assign name="menu" expr="'kurs_info.vxml'" />
+		<assign name="timestamp" expr="date.getTime()"/>
+		<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+		<!--MenuChoice Log-->
 	</block>
 	
-		<field name="kursinfo">
-			<grammar src= "../Grammatik/kursinfos.agl#Kurseinfos" type="application/x-nuance-gsl"/>
-			<prompt>
-				Gib jetzt den Kurs Kürzel an. 				
-			</prompt>
-		</field>
-
-		
-		<field name="spezielle">
-			<grammar src= "../Grammatik/spezielle.agl#Spezielle" type="application/x-nuance-gsl"/>
-				<prompt>
-					Willst du allgemeine oder Spezielle Infos zu dem Kurs <value expr="kursinfo.auswahl"/> ? 				
-				</prompt>
-			<filled>
-			
-				<if cond="spezielle.auswahl == 'spezielle'">
-					<assign name="alg" expr="'false'"/>
-				<else/>
-					<assign name="alg" expr="'true'"/>
-				</if>
-				
-				
-				<data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kursinfo alg"/>
-				
-				
-				<script> 
-					var data = getkursinfo.response;
-					var info = getkursinfo.info;
-					var name = getkursinfo.name;
-				</script>
-				
-				
-				
-				<prompt>
-				
-				<if cond="data == 'ok'">
-					Der Kurs <value expr="name"/> bietet folgende Infos an: <value expr="info"/>
-				<else/>
-					<value expr="data"/>
-				</if>
-				
-				</prompt>
-				<goto next="./getmoreinformation.vxml"/>
-			</filled>
-		</field>
+	<field name="kursinfo">
+		<grammar src= "../Grammatik/kursinfos.agl#Kurseinfos" type="application/x-nuance-gsl"/>
+		<prompt>
+			Gib jetzt den Kurs Namen oder Kürzel an. 				
+		</prompt>
 		
 		<nomatch cond="true" count="1">
 			Sorry, welchen Kurs meintest du?
 		</nomatch>
-			
-		<nomatch cond="true" count="2">
-			Sag bitte deutlich einen Kurskürzel.
-		</nomatch>
 		
+		<nomatch cond="true" count="2">
+			Sag bitte deutlich einen Kurskürzel oder den vollen Kursnamen.
+		</nomatch>
+	
 		<help count="1" cond="true">
-		<prompt>
-		Hilf dir selber.
-		</prompt>
-		<repromt/>
+			<prompt>
+				Gib hier einen Kurskürzel oder den vollen Kursnamen an, um Informationen zu erhalten.
+			</prompt>
+			<repromt/>
 		</help>
 		
+	</field>
+
+	
+	<field name="spezielle">
+		<grammar src= "../Grammatik/spezielle.agl#Spezielle" type="application/x-nuance-gsl"/>
+			<prompt>
+				Willst du allgemeine oder Spezielle Infos? 				
+			</prompt>
+		
+		<nomatch cond="true" count="1">
+			Sorry, meintest du speziell oder allgemeine?
+		</nomatch>
+		
+		<nomatch cond="true" count="2">
+			Sag bitte deutlich spezielle oder allgemeine.
+		</nomatch>
+	
+		<help count="1" cond="true">
+			<prompt>
+				Gib hier an ob du spezielle oder allgemeine Infos haben willst.
+			</prompt>
+			<repromt/>
+		</help>
+		<filled>
+			<if cond="spezielle.auswahl == 'spezielle'">
+					<assign name="alg" expr="'false'"/>
+				<else/>
+					<assign name="alg" expr="'true'"/>
+			</if>
+			<assign name="kurs" expr="kursinfo.auswahl"/>
+			<data name="getkursinfo" srcexpr=" url +'getkursinfo'" method="post" namelist="callID kurs alg"/>
+				<prompt>
+				Folgende Infos gibt es für den Kurs <value expr="getkursinfo.name"/>:
+				<value expr="getkursinfo.info"/> 
+				</prompt>
+			<goto next="./getmoreinformation.vxml"/>
+		</filled>
+	</field>
+		
+	
+	
 	</form>
 </vxml>		

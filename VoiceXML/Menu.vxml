@@ -2,7 +2,7 @@
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	<!-- =========================================================================
-	HauptMenue Modul
+	Menu Modul
 	========================================================================= -->
 		
 	<var name="ansprache" expr="'Gast'"/>		
@@ -31,7 +31,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<prompt>
 				<!-- audio src=""-->
 				Hallo, <value expr="ansprache"/>.
-				Willst du allgemeine Informationen sag bitte INFOS, für kurspezifische Informationen sag bitte KURS. 				
+				<!--wenn du allgemeine Informationen brauchst sag bitte INFOS, für kurspezifische Informationen sag bitte KURS. -->				
 				<!--/audio-->
 			</prompt>
 			
@@ -52,7 +52,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		</field>
 
 		<help count="1" cond="true">
-		Allgemeine Infos sind für alle, kurs infos nur für eingeschriebene studenten. Sag jetzt einfach Infos oder Kurs. 
+			Allgemeine Infos sind für alle, kursspezifische infos nur für die im jeweiligen Kurs eingeschriebenen studenten. Sag jetzt Infos oder Kurs. 
 		</help>
 		
 		<nomatch cond="true" count="1">
