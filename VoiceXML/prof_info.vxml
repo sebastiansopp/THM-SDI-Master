@@ -8,6 +8,17 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	<property name="confidencelevel" value="0.6" />
 	
 	<form id="choose_info" scope="dialog">
+		<block>
+			<!--MenuChoice Log-->
+			<script>
+						var date= new Date();
+			</script>
+			<assign name="menu" expr="'prof_info.vxml'" />
+			<assign name="timestamp" expr="date.getTime()"/>
+			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+			<!--MenuChoice Log-->
+		</block>
+		
 		<field name="profinfo">
 			<grammar src= "../Grammatik/prof_info.agl#Profinfo" type="application/x-nuance-gsl"/>
 			<prompt>
@@ -25,6 +36,14 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		
 		<block>
 			<if cond="info == 'nummer'">
+				<!--MenuChoice Log-->
+				<script>
+							var date= new Date();
+				</script>
+				<assign name="menu" expr="'prof_info.vxml#nummer'" />
+				<assign name="timestamp" expr="date.getTime()"/>
+				<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+				<!--MenuChoice Log-->
 				<assign name="name" expr="profinfo"/>
 				<data name="telnr" srcexpr=" url +'gettelnr'" method="post" namelist="name" />
 				<script> 
@@ -40,6 +59,14 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 				</prompt>
 				<goto next="prof_info.vxml#redirect" />
 			<elseif cond="info == 'zeiten'" />
+				<!--MenuChoice Log-->
+				<script>
+							var date= new Date();
+				</script>
+				<assign name="menu" expr="'prof_info.vxml#zeiten'" />
+				<assign name="timestamp" expr="date.getTime()"/>
+				<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+				<!--MenuChoice Log-->
 				<assign name="name" expr="profinfo"/>
 				<data name="zeiten" srcexpr=" url +'getzeiten'" method="post" namelist="name" />
 				<script> 
@@ -54,6 +81,14 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 				</prompt>
 				<goto next="prof_info.vxml#moreProfInfo" />
 			<elseif cond="info == 'raum'" />
+				<!--MenuChoice Log-->
+				<script>
+							var date= new Date();
+				</script>
+				<assign name="menu" expr="'prof_info.vxml#raum'" />
+				<assign name="timestamp" expr="date.getTime()"/>
+				<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+				<!--MenuChoice Log-->
 				<assign name="name" expr="profinfo"/>
 				<data name="raum" srcexpr=" url +'getraum'" method="post" namelist="name" />
 				<script> 
@@ -74,6 +109,16 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	
 	
 	<form id="moreProfInfo" scope="dialog">
+		<block>
+			<!--MenuChoice Log-->
+			<script>
+						var date= new Date();
+			</script>
+			<assign name="menu" expr="'prof_info.vxml#moreProfInfo'" />
+			<assign name="timestamp" expr="date.getTime()"/>
+			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+			<!--MenuChoice Log-->
+		</block>
 		<field name="moreInfo" type="boolean">
 			<grammar src="builtin:grammar/boolean?y=1;n=0"   />
 			<prompt>
@@ -91,6 +136,16 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	
 	
 	<form id="redirect" scope="dialog">
+		<block>
+			<!--MenuChoice Log-->
+			<script>
+						var date= new Date();
+			</script>
+			<assign name="menu" expr="'prof_info.vxml#redirect'" />
+			<assign name="timestamp" expr="date.getTime()"/>
+			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+			<!--MenuChoice Log-->
+		</block>
 		<field name="moreInfo" type="boolean">
 			<grammar src="builtin:grammar/boolean?y=1;n=0"   />
 			<prompt>

@@ -7,6 +7,17 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	<property name="confidencelevel" value="0.6" />
 
 	<form id="choose_info">
+		<block>
+			<!--MenuChoice Log-->
+			<script>
+						var date= new Date();
+			</script>
+			<assign name="menu" expr="'choose_info.vxml'" />
+			<assign name="timestamp" expr="date.getTime()"/>
+			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
+			<!--MenuChoice Log-->
+		</block>
+		
 		<field name="info">
 			<grammar src= "../Grammatik/choose_info.agl#Info" type="application/x-nuance-gsl"/>
 			<prompt>
