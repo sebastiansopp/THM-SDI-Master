@@ -21,13 +21,12 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		<field name="info">
 			<grammar src= "../Grammatik/choose_info.agl#Info" type="application/x-nuance-gsl"/>
 			<prompt>
-				WAs für Informationen wollen Sie? Sekretariatsinformationen, Termininformationen, Professoreninformationen, Mensainformationen.
+				Was für Informationen wollen Sie? Sekretariatsinformationen, Termininformationen, Professoreninformationen, Mensainformationen.
 			</prompt>
 			
 			<filled>
 				<prompt>
-					Sie haben
-					<value expr="info"/> gewählt. 
+					Sie haben <value expr="info"/> gewählt. 
 				</prompt>
 			</filled>
 		</field>

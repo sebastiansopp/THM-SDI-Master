@@ -16,6 +16,10 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<assign name="timestamp" expr="date.getTime()"/>
 			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
 			<!--MenuChoice Log-->
+			<!--CallEnd Log-->
+			<assign name="status" expr="'redirect.vxml#redirect'" />
+			<data name="logcallend" srcexpr=" url +'logcallend'" method="post" namelist="callID timestamp status" />
+			<!--CallEnd Log-->
 		</block>
 		
 		<field name="info">
