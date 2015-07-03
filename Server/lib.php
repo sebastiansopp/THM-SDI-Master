@@ -104,7 +104,7 @@ class SDIData {
     }
 
     function getKursInfo($callID, $kurs, $alg) {
-        if($alg == true || strcmp($alg, "true") == 0) {
+        if(strcmp($alg, "true") == 0) {
             $json2 = $this->readJson($this->kursinfo);
             $json3 = $this->readJson($this->kursname);
             if( $json2 != false && isset($json2[$kurs]) ){
@@ -120,7 +120,8 @@ class SDIData {
         else {
             $fileName = 'logs/'.$callID.'.json';
             $input = $this->readJson($fileName);
-
+			$json3 = $this->readJson($this->kursname);
+			
             if($input != false) {
                 $matrklNr = $input["matrkl"];
                 if(strlen($matrklNr) == 6){
@@ -129,10 +130,10 @@ class SDIData {
                         if (in_array($kurs, $json[$matrklNr]["kurse"])){
                             $punkte = rand(0, 100);
                             if($punkte < 50) {
-                                return '{"response": "ok", "info": "Sie haben nicht bestanden mit ' . $punkte . ' Punkten."}';
+                                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Sie haben nicht bestanden mit ' . $punkte . ' Punkten."}';
                             }
                             else {
-                                return '{"response": "ok", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
+                                return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
                             }
                         }
                         return '{"response": "kurs nicht angemeldet", "name": "", "info": ""}';
@@ -141,7 +142,7 @@ class SDIData {
                 return '{"response": "matrkl unavailable", "name": "", "info": ""}';
             }
         }
-        return '{"response": "unavailable", "info": ""}';
+        return '{"response": "unavailable", "name": "", "info": ""}';
     }
 
     function getTelNr($name) {
