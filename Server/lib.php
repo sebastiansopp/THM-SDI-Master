@@ -136,7 +136,7 @@ class SDIData {
                                 return '{"response": "ok", "name": "' . $json3[strtoupper($kurs)] . '", "info": "Sie haben bestanden mit ' . $punkte . ' Punkten."}';
                             }
                         }
-                        return '{"response": "kurs nicht angemeldet", "name": "", "info": ""}';
+                        return '{"response": "kurs nicht angemeldet", "name": "", "info": "kurs nicht angemeldet"}';
                     }
                 }
                 return '{"response": "matrkl unavailable", "name": "", "info": ""}';
