@@ -104,7 +104,7 @@ class SDIData {
     }
 
     function getKursInfo($callID, $kurs, $alg) {
-        if($alg == true) {
+        if($alg == true || strcmp($alg, "true") == 0) {
             $json2 = $this->readJson($this->kursinfo);
             $json3 = $this->readJson($this->kursname);
             if( $json2 != false && isset($json2[$kurs]) ){
