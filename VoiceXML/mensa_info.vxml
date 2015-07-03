@@ -2,9 +2,7 @@
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	
-	<property name="bargein" value="true" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.6" />
+
 	
 	<form id="mensa_info">
 		<block>
@@ -20,8 +18,11 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		
 		<field name="info">
 			<prompt>
-				Mensa Informationen
+				 Du hast Mensa Informationen gewählt.
 			</prompt>
+			<block>
+			<goto next="./getmoreinformation.vxml" />
+			</block>
 		</field>
 	</form>
 	

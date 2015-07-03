@@ -3,9 +3,7 @@
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	
 	
-	<property name="bargein" value="false" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.6" />
+	
 	
 	<form id="choose_info" scope="dialog">
 		<block>
@@ -22,14 +20,14 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		<field name="profinfo">
 			<grammar src= "../Grammatik/prof_info.agl#Profinfo" type="application/x-nuance-gsl"/>
 			<prompt>
-				Ueber welchen Professor wollen sie Informationen?
+				Ueber welchen Professor willst du Informationen?
 			</prompt>
 		</field>
 		
 		<field name="info">
 			<grammar src= "../Grammatik/specific_info.agl#Info" type="application/x-nuance-gsl"/>
 			<prompt>
-				Was für Informationen wollen Sie? Rauminformationen, Sprechzeiten oder Telefonnummer.
+				Was für Informationen willst du? Rauminformationen, Sprechzeiten oder Telefonnummer.
 			</prompt>
 		</field>
 		
@@ -122,7 +120,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		<field name="moreInfo" type="boolean">
 			<grammar src="builtin:grammar/boolean?y=1;n=0"   />
 			<prompt>
-					Wollen Sie mehr Professoreninformationen?				
+					Willst du mehr Professoreninformationen?				
 			</prompt>
 			<filled>
 				<if cond="moreInfo == 'false'">
@@ -149,7 +147,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		<field name="moreInfo" type="boolean">
 			<grammar src="builtin:grammar/boolean?y=1;n=0"   />
 			<prompt>
-					Wollen Sie weitergeleitet werden?				
+					Willst du weitergeleitet werden?				
 			</prompt>
 			<filled>
 				<if cond="moreInfo == 'false'">

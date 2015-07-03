@@ -28,7 +28,7 @@ Kursspezifische Informationen Modul
 	<field name="kursinfo">
 		<grammar src= "../Grammatik/kursinfos.agl#Kurseinfos" type="application/x-nuance-gsl"/>
 		<prompt>
-			Gib jetzt den Kurs Namen oder Kürzel an. 				
+			Gib jetzt den Kurs Namen oder Kürzel an.			
 		</prompt>
 		
 		<nomatch cond="true" count="1">
@@ -52,7 +52,7 @@ Kursspezifische Informationen Modul
 	<field name="spezielle">
 		<grammar src= "../Grammatik/spezielle.agl#Spezielle" type="application/x-nuance-gsl"/>
 			<prompt>
-				Willst du allgemeine oder Spezielle Infos? 				
+				Willst du allgemeine oder Spezielle Infos zu <say-as type="acronym"><value expr="kursinfo.auswahl.toUpperCase()"/></say-as> haben?		
 			</prompt>
 		
 		<nomatch cond="true" count="1">

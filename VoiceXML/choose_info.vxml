@@ -2,9 +2,7 @@
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	
-	<property name="bargein" value="false" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.6" />
+	
 
 	<form id="choose_info">
 		<block>
@@ -21,14 +19,9 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 		<field name="info">
 			<grammar src= "../Grammatik/choose_info.agl#Info" type="application/x-nuance-gsl"/>
 			<prompt>
-				Was für Informationen wollen Sie? Sekretariatsinformationen, Termininformationen, Professoreninformationen, Mensainformationen.
+				Willst du Informationen über das Sekretariat, Termine, Professoren oder der Mensa.
 			</prompt>
-			
-			<filled>
-				<prompt>
-					Sie haben <value expr="info"/> gewählt. 
-				</prompt>
-			</filled>
+						
 		</field>
 		
 		<block>

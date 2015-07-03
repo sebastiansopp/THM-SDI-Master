@@ -44,7 +44,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 					<else/>
 						<goto next="./checkmtnr.vxml"/>
 					</if>
-					<elseif cond="menu=='infos'"/>
+				<elseif cond="menue=='infos'"/>
 					<goto next="./choose_info.vxml" />
 				</if>
 					
