@@ -24,8 +24,11 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	
 		<field name="info">
 			<prompt>
-				Termin Informationen
+				 Du hast Termin Informationen gewählt.
 			</prompt>
+			<block>
+			<goto next="./getmoreinformation.vxml" />
+			</block>
 		</field>
 	</form>
 </vxml>

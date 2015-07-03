@@ -22,14 +22,18 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 				<assign name="timestamp" expr="date.getTime()"/>
 				<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
 			<!--MenuChoice Log-->
+			
+			<prompt>
+				Leider ist deine Telefon Nummer unbekannt. 
+				Gib jetzt bitte deine Matrikelnummer per Tasten ein. 				
+			</prompt>
 		</block>
 	
+		
+				
 		<field name="matrklNr">
 			<grammar src="builtin:dtmf/digits?length=6" mode="dtmf"/>
-				<prompt>
-					Leider ist deine Telefon Nummer unbekannt. 
-					Gib jetzt bitte deine Matrikelnummer per Tasten ein. 				
-				</prompt>
+		
 			<filled>		
 				<prompt>
 					Deine Matrikelnummer lautet: <say-as interpret-as="number"><value expr="matrklNr"/></say-as>
@@ -44,7 +48,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 				Ist das richtig? 
 			</prompt>
 			<filled>
-				<if cond="confirmMtnr == 'false'">
+				<if cond="confirmMtnr == 'false' || confirmMtnr == 'no'">
 					<prompt>
 						Gib die Matrikelnummer nochmal ein.
 					</prompt>

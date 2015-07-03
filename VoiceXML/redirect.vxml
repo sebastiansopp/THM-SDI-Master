@@ -2,9 +2,6 @@
 <vxml xmlns="http://www.w3.org/2001/vxml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" version="2.1" xml:lang="de-DE" application = "root.vxml">
 	
-	<property name="bargein" value="false" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.6" />
 	
 	<form id="redirect">
 		<block>
@@ -16,16 +13,18 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<assign name="timestamp" expr="date.getTime()"/>
 			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
 			<!--MenuChoice Log-->
-			<!--CallEnd Log-->
-			<assign name="status" expr="'redirect.vxml#redirect'" />
-			<data name="logcallend" srcexpr=" url +'logcallend'" method="post" namelist="callID timestamp status" />
-			<!--CallEnd Log-->
+			<assign name="specialStatus" expr="'Redirect ' + redirectNr" />
+			
 		</block>
 		
 		<field name="info">
 			<prompt>
 				Sie werden jetzt zu der Nummer <value expr="redirectNr"/> weitergeleitet.
 			</prompt>
+			<block>
+			<disconnect />
+			</block>
 		</field>
+		
 	</form>
 </vxml>

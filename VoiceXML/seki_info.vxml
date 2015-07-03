@@ -6,9 +6,7 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 	Kursspezifische Informationen Modul
 	========================================================================= -->
 	
-	<property name="bargein" value="false" />
-	<property name="timeout" value="4000ms" />
-	<property name="confidencelevel" value="0.6" />
+	
 	
 	<form id="choose_info">
 		<block>
@@ -21,10 +19,11 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
 			<!--MenuChoice Log-->
 		</block>
-		<field name="info">
+		<block>
 			<prompt>
-				Sekretariat Informationen
+				 Du hast Sekretariat Informationen gewählt.
 			</prompt>
-		</field>
+			<goto next="./getmoreinformation.vxml" />
+		</block>
 	</form>
 </vxml>
