@@ -1,0 +1,28 @@
+Ablauf:
+
+mit bekannter nummer:
+kurs
+sdi
+spezielle
+(Wenn in Kurs nicht angemeldet...)
+
+
+mainmenu (HILFE)
+infos
+Prof infos
+raum 
+zeiten 
+nummer
+weiterleiten
+
+
+mit unbekannter nummer:
+
+kurs
+check - mtnr- pin -1x falsch
+mv1
+allgemeine
+
+Ende
+
+

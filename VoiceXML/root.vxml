@@ -15,6 +15,7 @@ version="2.1" xml:lang="de-DE">
 <var name="status"/>
 <var name="specialStatus"/>
 <var name="redirectNr" />
+<var name="firstTime" expr="true" />
 
 
 <property name="bargein" value="false" />
@@ -77,10 +78,12 @@ version="2.1" xml:lang="de-DE">
 
 <nomatch count="1">
 	Wie war das?
+	<reprompt/>
 </nomatch>
 
 <nomatch count="2">
 	Ich habe Sie leider nicht verstanden. Was haben Sie gesagt?
+	<reprompt/>
 </nomatch>
 
 <nomatch count="5">

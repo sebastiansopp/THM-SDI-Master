@@ -5,7 +5,7 @@ Wahl[
 	Kurs
 ] {return($return)}
 
-Kurs [kurs ] {return ("kurs")}
+Kurs [kurs kursinformationen ] {return ("kurs")}
 
 Infos [infos informationen] {return ("infos")}
 
