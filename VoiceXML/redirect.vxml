@@ -14,17 +14,15 @@ xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/
 			<data name="logmenuchoice" srcexpr=" url +'logmenuchoice'" method="post" namelist="callID timestamp menu" />
 			<!--MenuChoice Log-->
 			<assign name="specialStatus" expr="'Redirect ' + redirectNr" />
-			
-		</block>
-		
-		<field name="info">
 			<prompt>
 				Sie werden jetzt zu der Nummer <value expr="redirectNr"/> weitergeleitet.
 			</prompt>
-			<block>
-			<disconnect />
-			</block>
-		</field>
+			<disconnect/>
+		</block>
+		
+		
+			
+		
 		
 	</form>
 </vxml>
